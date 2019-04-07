@@ -214,6 +214,7 @@
     <property name="HOTFIX_customHotfixCommitMessage_text" value="Tagging hotfix %name%" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="RELEASE_customTagCommitMessage_text" value="Tagging version %name%" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="D:/AndroidSDK" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
