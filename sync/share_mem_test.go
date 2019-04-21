@@ -6,22 +6,21 @@ import (
 	"time"
 )
 
-func TestCounter(t *testing.T){
-	count :=0
-	for i:=0;i<5000;i++{
+func TestCounter(t *testing.T) {
+	count := 0
+	for i := 0; i < 5000; i++ {
 		go func() {
 			count++
 		}()
 	}
-	time.Sleep(1* time.Second)
-	t.Log("count num:",count)
+	time.Sleep(1 * time.Second)
+	t.Log("count num:", count)
 }
 
-
-func TestCounterSafe(t *testing.T){
+func TestCounterSafe(t *testing.T) {
 	var mux sync.Mutex
-	count :=0
-	for i:=0;i<5000;i++{
+	count := 0
+	for i := 0; i < 5000; i++ {
 		go func() {
 			defer func() {
 				mux.Unlock()
@@ -31,17 +30,15 @@ func TestCounterSafe(t *testing.T){
 		}()
 	}
 	// sync running is so fast.
-	time.Sleep(1* time.Second)
-	t.Log("count num:",count)
+	time.Sleep(1 * time.Second)
+	t.Log("count num:", count)
 }
 
-
-
-func TestCounterWaitGroup(t *testing.T){
+func TestCounterWaitGroup(t *testing.T) {
 	var mux sync.Mutex
 	var wg sync.WaitGroup
-	count :=0
-	for i:=0;i<5000;i++{
+	count := 0
+	for i := 0; i < 5000; i++ {
 		wg.Add(1)
 		go func() {
 			defer func() {
@@ -49,9 +46,9 @@ func TestCounterWaitGroup(t *testing.T){
 			}()
 			mux.Lock()
 			count++
-			wg.Done()
+			defer wg.Done()
 		}()
 	}
 	wg.Wait()
-	t.Log("count num:",count)
+	t.Log("count num:", count)
 }
